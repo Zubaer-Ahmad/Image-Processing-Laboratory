@@ -1,26 +1,25 @@
+import cv2
 import matplotlib.pyplot as plt
-from PIL import Image
-from PIL import ImageEnhance
 
-image = Image.open('lab.jpg')
+# Read image
+img = cv2.imread('lab.jpg')
 
-contrast = ImageEnhance.Contrast(image)
+# Contrast enhancement
+contrast = cv2.convertScaleAbs(img, alpha=2.0, beta=0)
 
-new_contrast = 8.3
+# Convert BGR → RGB
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+contrast_rgb = cv2.cvtColor(contrast, cv2.COLOR_BGR2RGB)
 
-img_contrast = contrast.enhance(new_contrast)
-
-
-plt.subplot(221)
-plt.imshow(image)
+# Display images
+plt.subplot(1,2,1)
+plt.imshow(img_rgb)
 plt.title("Original Image")
 plt.axis('off')
 
-plt.subplot(222)
-plt.imshow(img_contrast)
-plt.title("contrast")
+plt.subplot(1,2,2)
+plt.imshow(contrast_rgb)
+plt.title("Contrast Enhanced Image")
 plt.axis('off')
 
 plt.show()
-
-
