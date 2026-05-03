@@ -30,3 +30,34 @@ plt.title("Color Enhanced")
 plt.axis('off')
 
 plt.show()
+
+--------------------------- New Code:
+
+from PIL import Image
+from PIL import ImageEnhance
+from matplotlib import pyplot as plt
+
+# Opens the image file
+image = Image.open('boy.png')
+if image is None:
+    print("Error: Could not read image.")
+    exit()
+
+# Enhance Color Level
+curr_col = ImageEnhance.Color(image)
+new_col = 2.5
+
+# Color level enhanced by a factor of 2.5
+img_colored = curr_col.enhance(new_col)
+
+# shows updated image in image viewer
+plt.subplot(121)
+plt.imshow(image)
+plt.title('Original')
+plt.axis('off')
+
+plt.subplot(122)
+plt.imshow(img_colored)
+plt.title('Color_Enhanced')
+plt.axis('off')
+plt.show()
